@@ -79,5 +79,5 @@ async function scrapeMovieRatings(userUrl) {
     }
 }
 
-module.exports = scrapeMovieRatings;
+export default scrapeMovieRatings;
 
