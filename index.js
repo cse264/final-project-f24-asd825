@@ -22,7 +22,7 @@ app.use(session({
 ));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static("public")); // FRONTEND
 
 app.use(passport.initialize());
 app.use(passport.session());
