@@ -9,6 +9,9 @@ import session from "express-session";
 import env from "dotenv";
 import axios from "axios";
 
+import scrapeMovieRatings from './letterboxd.js';
+
+
 const app = express();
 const saltRounds = 10;
 const port = 3000;
@@ -605,6 +608,10 @@ passport.use(
       res.status(500).send("Error updating movie in wishlist.");
     }
   });
+
+
+  //Letterboxd Scraper TODO:
+
 
   
 
