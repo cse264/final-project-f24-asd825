@@ -436,6 +436,176 @@ passport.use(
   //     res.status(500).send("Error getting wish list.");
   //   }
   // });
+
+  //add a movie to the watchedlist
+  app.post("/watchedlist", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.body.movie_id;
+      const rating = req.body.rating;
+  
+      const result = await db.query(
+        "INSERT INTO watchedlist (tmdb_id, rating, user_id) VALUES ($1, $2, $3) RETURNING *",
+        [movieId, rating, userId]
+      );
+  
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error("Error adding movie to watchedlist:", err);
+      res.status(500).send("Error adding movie to watchedlist.");
+    }
+  });
+
+  // if the first one doesn't work (for the watchedlist adding) TODO:
+
+
+  // add a movie to the wishlist
+  app.post("/wishlist", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.body.movie_id;
+  
+      const result = await db.query(
+        "INSERT INTO wishlist (tmdb_id, user_id) VALUES ($1, $2) RETURNING *",
+        [movieId, userId]
+      );
+  
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error("Error adding movie to wishlist:", err);
+      res.status(500).send("Error adding movie to wishlist.");
+    }
+  });
+
+  // if the first one doesn't work (for the wishlist adding) TODO:
+
+
+  // remove a movie from the watchedlist
+  app.delete("/watchedlist/:movieId", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.params.movieId;
+  
+      const result = await db.query(
+        "DELETE FROM watchedlist WHERE tmdb_id = $1 AND user_id = $2 RETURNING *",
+        [movieId, userId]
+      );
+  
+      if (result.rows.length === 0) {
+        res.status(404).send("Movie not found in watchedlist.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error removing movie from watchedlist:", err);
+      res.status(500).send("Error removing movie from watchedlist.");
+    }
+  });
+
+  // Delete a movie from the wishlist
+  app.delete("/wishlist/:movieId", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.params.movieId;
+  
+      const result = await db.query(
+        "DELETE FROM wishlist WHERE tmdb_id = $1 AND user_id = $2 RETURNING *",
+        [movieId, userId]
+      );
+  
+      if (result.rows.length === 0) {
+        res.status(404).send("Movie not found in wishlist.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error removing movie from wishlist:", err);
+      res.status(500).send("Error removing movie from wishlist.");
+    }
+  });
+
+
+  // update a movie in the watchedlist
+  app.put("/watchedlist/:movieId", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.params.movieId;
+      const rating = req.body.rating;
+  
+      const result = await db.query(
+        "UPDATE watchedlist SET rating = $1 WHERE tmdb_id = $2 AND user_id = $3 RETURNING *",
+        [rating, movieId, userId]
+      );
+  
+      if (result.rows.length === 0) {
+        res.status(404).send("Movie not found in watchedlist.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error updating movie in watchedlist:", err);
+      res.status(500).send("Error updating movie in watchedlist.");
+    }
+  });
+
+  // update a movie in the wishlist
+  app.put("/wishlist/:movieId", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const movieId = req.params.movieId;
+  
+      const result = await db.query(
+        "UPDATE wishlist SET tmdb_id = $1 WHERE tmdb_id = $2 AND user_id = $3 RETURNING *",
+        [req.body.new_movie_id, movieId, userId]
+      );
+  
+      if (result.rows.length === 0) {
+        res.status(404).send("Movie not found in wishlist.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error updating movie in wishlist:", err);
+      res.status(500).send("Error updating movie in wishlist.");
+    }
+  });
+
   
 
 
