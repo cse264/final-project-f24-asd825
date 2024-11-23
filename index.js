@@ -39,11 +39,12 @@ const db = new pg.Client({
   });
   db.connect();
 
+
+  
 // renders the home page
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { //FRONTEND
     if (req.isAuthenticated()) {
         //TODO: fetch the reccomendations for the user
-
         res.render("home.ejs", { user: req.user });
     } else {
         res.redirect("/register");
@@ -88,6 +89,7 @@ app.get("/find", async (req, res) => {
 
             // Send the result back to Postman
             res.json(data);  // Use .json() to send JSON data
+            // res.render("find.ejs", { movies: data.results }); // FRONTEND
         } catch (error) {
             console.log("Error fetching movie data:", error);
             res.status(500).send("Error fetching movie data.");
@@ -130,6 +132,7 @@ app.get("/title/:movieId", async (req, res) => {
 
             // Send the result back to Postman
             res.json(data);  // Use .json() to send JSON data
+            // res.render("movie.ejs", { movie: data }); // FRONTEND
         } catch (error) {
             console.log("Error fetching movie data:", error);
             res.status(500).send("Error fetching movie data.");
@@ -139,17 +142,31 @@ app.get("/title/:movieId", async (req, res) => {
 );
 
 // render the register page
+// FRONTEND
 app.get("/register", (req, res) => {
     res.render("register.ejs");
 }
 );
 
+// render the signup page
+// FRONTEND
+app.get("/register/signup", (req, res) => {
+  res.render("signup.ejs");
+});
+
+
+// render the signin page
+// FRONTEND
+app.get("/register/signin", (req, res) => {
+  res.render("signin.ejs");
+});
+
+
+
+
 /////////Authentication!\\\\\\\\\\\
 
-// render the signup page
-app.get("/register/signup", (req, res) => {
-    res.render("signup.ejs");
-});
+
 
 // register a new user
 app.post("/register/signup", async (req,res) =>{
@@ -188,10 +205,7 @@ app.post("/register/signup", async (req,res) =>{
 
 });
 
-// render the signin page
-app.get("/register/signin", (req, res) => {
-    res.render("signin.ejs");
-});
+
 
 // sign in a user
 app.post("/register/signin",
@@ -300,6 +314,135 @@ passport.use(
   passport.deserializeUser((user, cb) => {
     cb(null, user);
   });
+
+
+  ///////////Watchlists\\\\\\\\\\\\
+
+
+  const getUserIDByEmail = async (email) => {
+    return db.query("SELECT id FROM users WHERE email = $1", [email]);
+  };
+  //get the watchedlist
+  app.get("/watchedlist", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      // Use req.user.id instead of req.params to ensure proper ownership of data
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+  
+      // Query the user's watched list
+      const result = await db.query(
+        "SELECT * FROM watchedlist WHERE user_id = $1",
+        [userId]
+      );
+  
+      // Send JSON response (or render a frontend page if needed)
+      res.json(result.rows);
+    } catch (err) {
+      console.error("Error getting watchedlist:", err);
+      res.status(500).send("Error getting watched list.");
+    }
+  });
+
+  // Another way in case the first one doesn't work (for the watchedlist)
+
+  // app.get("/watchedlist", async (req, res) => {
+  //   if (!req.isAuthenticated()) {
+  //     res.redirect("/register/signin");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const email = req.user.email;
+  
+  //     // Query watchedlist using a JOIN to fetch by email directly
+  //     const result = await db.query(
+  //       "SELECT w.* FROM watchedlist w JOIN users u ON w.user_id = u.id WHERE u.email = $1",
+  //       [email]
+  //     );
+  
+  //     if (result.rows.length === 0) {
+  //       res.status(404).send("No watched items found.");
+  //       return;
+  //     }
+  
+  //     // Send JSON response (or render EJS)
+  //     res.json(result.rows);
+  //     // res.render("watchedlist.ejs", { watchedlist: result.rows }); // FRONTEND
+  //   } catch (err) {
+  //     console.error("Error getting watchedlist:", err);
+  //     res.status(500).send("Error getting watched list.");
+  //   }
+  // });
+
+  //get the wishlist
+
+  app.get("/wishlist", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+  
+    try {
+      // Use req.user.id instead of req.params to ensure proper ownership of data
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+  
+      // Query the user's watched list
+      const result = await db.query(
+        "SELECT * FROM wishlist WHERE user_id = $1",
+        [userId]
+      );
+  
+      // Send JSON response (or render a frontend page if needed)
+      res.json(result.rows);
+    } catch (err) {
+      console.error("Error getting wishlist:", err);
+      res.status(500).send("Error getting wish list.");
+    }
+  });
+
+  // Another way in case the first one doesn't work (for the wishlist)
+
+  // app.get("/watchedlist", async (req, res) => {
+  //   if (!req.isAuthenticated()) {
+  //     res.redirect("/register/signin");
+  //     return;
+  //   }
+  
+  //   try {
+  //     const email = req.user.email;
+  
+  //     // Query watchedlist using a JOIN to fetch by email directly
+  //     const result = await db.query(
+  //       "SELECT w.* FROM watchedlist w JOIN users u ON w.user_id = u.id WHERE u.email = $1",
+  //       [email]
+  //     );
+  
+  //     if (result.rows.length === 0) {
+  //       res.status(404).send("No wished items found.");
+  //       return;
+  //     }
+  
+  //     // Send JSON response (or render EJS)
+  //     res.json(result.rows);
+  //     // res.render("wishlist.ejs", { watchedlist: result.rows }); // FRONTEND
+  //   } catch (err) {
+  //     console.error("Error getting wishlist:", err);
+  //     res.status(500).send("Error getting wish list.");
+  //   }
+  // });
+  
+
+
+  
+  
+
+
 
 
 
