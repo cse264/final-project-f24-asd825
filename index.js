@@ -609,7 +609,7 @@ passport.use(
     }
   });
 
-export default {getMovieById, getUserIDByEmail, searchMovie};
+
 
   // add movies from letterboxd to the database
   app.post("/letterboxd", async (req, res) =>{
@@ -679,7 +679,82 @@ async function addMoviesToDatabase(tmdbIds, ratings,user_id) {
           console.error('Error adding movie to database:', error);
       }
   }
+};
+
+
+
+/////////Users\\\\\\\\\\\\
+
+// render user profile page
+app.get("/user", async (req, res) => { //FRONTEND
+  if (!req.isAuthenticated()) {
+    res.redirect("/register/signin");
+    return;
+  }
+  // u have acess to req.user.email & password & first_name & last_name & id
+  res.render("profile.ejs", { user: req.user });
 }
+);
+
+// update user profile
+app.put("/user", async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ error: "Unauthorized. Please log in." });
+  }
+  
+  try {
+    const email = req.user.email;
+    const userId = (await getUserIDByEmail(email)).rows[0].id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const password = req.body.password;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+
+    const result = await db.query(
+      "UPDATE users SET first_name = $1, last_name = $2, password = $3 WHERE id = $4 RETURNING *",
+      [firstName, lastName, hashedPassword, userId]
+    );
+
+    res.json(result.rows[0]);
+  }
+  catch (err) {
+    console.error("Error updating user profile:", err);
+    res.status(500).send("Error updating user profile.");
+  }
+}
+);
+
+// delete user profile
+app.delete("/user", async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ error: "Unauthorized. Please log in." });
+  }
+
+  try {
+    const userId = req.user.id; // Use user ID directly if available from middleware
+
+    const result = await db.query(
+      "DELETE FROM users WHERE id = $1 RETURNING *",
+      [userId]
+    );
+
+    // Handle case where no user was deleted
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "User not found. Unable to delete." });
+    }
+
+    // Remove sensitive fields before sending the response
+    const { id, email, first_name, last_name } = result.rows[0];
+    res.json({ id, email, first_name, last_name });
+  } catch (err) {
+    console.error("Error deleting user profile:", err);
+    res.status(500).json({ error: "An unexpected error occurred while deleting the user profile." });
+  }
+});
+
+
+
 
 
   
