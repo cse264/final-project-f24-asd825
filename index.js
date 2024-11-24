@@ -609,6 +609,7 @@ passport.use(
     }
   });
 
+export default {getMovieById, getUserIDByEmail, searchMovie};
 
   //Letterboxd Scraper TODO:
 
