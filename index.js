@@ -783,6 +783,102 @@ app.get("/user", async (req, res) => {
 }
 );
 
+/////////Admin Only\\\\\\\\\\\\
+
+// get all users
+app.get("/admin/users", async (req, res) => {
+  if (req.isAuthenticated() && req.user.user_type === "admin") {
+    try {
+      // Only select necessary fields (e.g., id, name, email, user_type)
+      const result = await db.query("SELECT id, email, first_name, last_name, user_type FROM users");
+      res.json(result.rows);
+    } catch (err) {
+      console.error("Error getting all users:", err);
+      res.status(500).send("Error getting all users.");
+    }
+  } else {
+    res.status(401).send("Unauthorized. Admin access required.");
+  }
+});
+
+// get user by id
+app.get("/admin/users/:userId", async (req, res) => {
+  if (req.isAuthenticated() && req.user.user_type === "admin") {
+    try {
+      const userId = req.params.userId;
+      const result = await db.query("SELECT * FROM users WHERE id = $1", [userId]);
+
+      if (result.rows.length === 0) {
+        res.status(404).send("User not found.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error getting user by ID:", err);
+      res.status(500).send("Error getting user by ID.");
+    }
+  } else {
+    res.status(401).send("Unauthorized. Admin access required.");
+  }
+}
+);
+
+// update user by id
+app.put("/admin/users/:userId", async (req, res) => {
+  if (req.isAuthenticated() && req.user.user_type === "admin") {
+    try {
+      const userId = req.params.userId;
+      const firstName = req.body.firstName;
+      const lastName = req.body.lastName;
+      const email = req.body.email;
+      const userType = req.body.userType;
+
+      const result = await db.query(
+        "UPDATE users SET first_name = $1, last_name = $2, email = $3, user_type = $4 WHERE id = $5 RETURNING *",
+        [firstName, lastName, email, userType, userId]
+      );
+
+      if (result.rows.length === 0) {
+        res.status(404).send("User not found.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error updating user by ID:", err);
+      res.status(500).send("Error updating user by ID.");
+    }
+  } else {
+    res.status(401).send("Unauthorized. Admin access required.");
+  }
+}
+);
+
+// delete user by id
+app.delete("/admin/users/:userId", async (req, res) => {
+  if (req.isAuthenticated() && req.user.user_type === "admin") {
+    try {
+      const userId = req.params.userId;
+      const result = await db.query("DELETE FROM users WHERE id = $1 RETURNING *", [userId]);
+
+      if (result.rows.length === 0) {
+        res.status(404).send("User not found.");
+      } else {
+        res.json(result.rows[0]);
+      }
+    } catch (err) {
+      console.error("Error deleting user by ID:", err);
+      res.status(500).send("Error deleting user by ID.");
+    }
+  } else {
+    res.status(401).send("Unauthorized. Admin access required.");
+  }
+}
+);
+
+
+
+
+
 
 
 
