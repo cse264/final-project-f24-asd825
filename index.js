@@ -725,7 +725,7 @@ app.put("/user", async (req, res) => {
 }
 );
 
-// delete user profile
+// delete user profile (may need to implement cascade delete for related tables)
 app.delete("/user", async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ error: "Unauthorized. Please log in." });
