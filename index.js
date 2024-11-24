@@ -611,7 +611,75 @@ passport.use(
 
 export default {getMovieById, getUserIDByEmail, searchMovie};
 
-  //Letterboxd Scraper TODO:
+  // add movies from letterboxd to the database
+  app.post("/letterboxd", async (req, res) =>{
+    if (!req.isAuthenticated()) {
+      res.redirect("/register/signin");
+      return;
+    }
+    try {
+      const email = req.user.email;
+      const userId = (await getUserIDByEmail(email)).rows[0].id;
+      const letterboxdUser= req.body.letterboxdUser;
+      const userURL = `https://letterboxd.com/${letterboxdUser}/films/`;
+      console.log(`Starting to scrape movies from: ${userURL}`);
+      const movies = await scrapeMovieRatings(userURL);
+      console.log('Finished scraping movies.');
+
+      const titles = movies.map(movie => movie.title);
+
+      const ratings = movies.map(movie => {
+        const stars = movie.rating.match(/★/g)?.length || 0; // Count full stars
+        const halfStar = movie.rating.includes('½') ? 0.5 : 0; // Check for half-star
+        return stars + halfStar;
+    });
+
+    const tmdbIds = await getAllTmdbIds(titles);
+
+
+    // adding movies to the database
+    await addMoviesToDatabase(tmdbIds, ratings, userId);
+    res.status(200).send('Movies added to database successfully.');
+
+      
+    }
+    catch (error) {
+      console.error("Error fetching movie data:", error);
+    }
+
+  });
+
+  const getAllTmdbIds = async (titles) => {
+    const cleanTitle = (title) => title.replace(/\s*\(\d{4}\)$/, '').trim();
+    let tmdbIds = [];
+    for (const title of titles) {
+        console.log(cleanTitle(title));
+        const movieData = await searchMovie(cleanTitle(title));
+        if (movieData.results.length > 0) {
+            console.log(movieData.results[0].id);
+            tmdbIds.push(movieData.results[0].id);
+        }
+    }
+    return tmdbIds;
+};
+
+async function addMoviesToDatabase(tmdbIds, ratings,user_id) {
+  for (let i = 0; i < tmdbIds.length; i++) {
+      
+
+      const query = {
+          text: `INSERT INTO watchedlist (tmdb_id, rating , user_id) VALUES ($1, $2 , $3)`,
+          values: [tmdbIds[i], ratings[i], user_id]
+      };
+
+      try {
+          await db.query(query); // Await the query execution to handle asynchronous behavior
+          console.log(`Movie with TMDB ID: ${tmdbIds[i]} added to watched list.`);
+      } catch (error) {
+          console.error('Error adding movie to database:', error);
+      }
+  }
+}
 
 
   
