@@ -73,32 +73,29 @@ const searchMovie = async (movieName) => {
         console.error("Error fetching movie data:", error);
     }
 };
-
-
-// the find page (imdb.com/find?query=wonderwoman)
-
 app.get("/find", async (req, res) => {
-    const query = req.query.query;
+  const query = req.query.query;
 
-    if (!query) {
-        res.redirect("/");
-        console.log("No query provided");
-        return;
-    } else {
-        try {
-            // Await the result of the searchMovie function
-            const data = await searchMovie(query);
-            console.log(data);
+  if (!query) {
+      res.redirect("/");
+      return;
+  }
 
-            // Send the result back to Postman
-            res.json(data);  // Use .json() to send JSON data
-            // res.render("find.ejs", { movies: data.results }); // FRONTEND
-        } catch (error) {
-            console.log("Error fetching movie data:", error);
-            res.status(500).send("Error fetching movie data.");
-        }
-    }
+  try {
+      const data = await searchMovie(query); // Use your searchMovie function
+      const movies = data.results || []; // Fallback if no results are returned
+
+      res.render("find.ejs", { movies });
+      // res.json(data);
+  } catch (error) {
+      console.error("Error fetching movie data:", error);
+      res.status(500).send("Error fetching movie data.");
+  }
 });
+
+
+
+
 
 const getMovieById = async (movieId) => {
     const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
@@ -112,7 +109,7 @@ const getMovieById = async (movieId) => {
 
     try {
         const response = await axios.get(url, options);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching movie data:", error);
@@ -121,28 +118,23 @@ const getMovieById = async (movieId) => {
 
 // the movie page (imdb.com/title/tt1234567)
 app.get("/title/:movieId", async (req, res) => {
-    const movieId = req.params.movieId;
+  const movieId = req.params.movieId;
 
-    if (!movieId) {
-        res.redirect("/");
-        console.log("No movie ID provided");
-        return;
-    } else {
-        try {
-            // Await the result of the getMovieById function
-            const data = await getMovieById(movieId);
-            console.log(data);
+  if (!movieId) {
+      res.redirect("/");
+      return;
+  }
 
-            // Send the result back to Postman
-            res.json(data);  // Use .json() to send JSON data
-            // res.render("movie.ejs", { movie: data }); // FRONTEND
-        } catch (error) {
-            console.log("Error fetching movie data:", error);
-            res.status(500).send("Error fetching movie data.");
-        }
-    }
-}
-);
+  try {
+      const data = await getMovieById(movieId); // Use your getMovieById function
+      // res.json(data);
+      res.render("movie.ejs", { movie: data });
+  } catch (error) {
+      console.error("Error fetching movie details:", error);
+      res.status(500).send("Error fetching movie details.");
+  }
+});
+
 
 // render the register page
 // FRONTEND
@@ -874,76 +866,6 @@ app.delete("/admin/users/:userId", async (req, res) => {
   }
 }
 );
-
-
-
-
-
-
-
-
-
-  
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   app.listen(port, () => {

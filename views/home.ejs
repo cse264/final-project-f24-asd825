@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome, <%= user.first_name %>!</h1>
+        <!-- Navigation Buttons -->
+        <nav>
+            <button onclick="location.href='/profile'">Profile</button>
+            <button onclick="location.href='/wishlist'">Wishlist</button>
+            <button onclick="location.href='/watchlist'">Watchlist</button>
+        </nav>
+    </header>
+
+    <!-- Search Bar -->
+    <main>
+        <form action="/find" method="GET">
+            <label for="search">Search for a movie:</label>
+            <input type="text" id="search" name="query" placeholder="Enter movie name..." required>
+            <button type="submit">Search</button>
+        </form>
+    </main>
+</body>
+</html>

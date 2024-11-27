@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Movies</title>
+</head>
+<body>
+    <header>
+        <h1>Discover Movies</h1>
+        <!-- Back to Homepage Button -->
+        <button onclick="location.href='/'">Back to Homepage</button>
+    </header>
+
+    <main>
+        <% if (movies.length > 0) { %>
+            <div id="movie-results">
+                <% movies.forEach(movie => { %>
+                    <div class="movie-item">
+                        <!-- Clickable Poster -->
+                        <a href="/title/<%= movie.id %>">
+                            <img src="https://image.tmdb.org/t/p/w200<%= movie.poster_path %>" alt="<%= movie.title %> Poster">
+                        </a>
+                        <p><%= movie.title %></p>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>No movies found for your search. Try another query!</p>
+        <% } %>
+    </main>
+</body>
+</html>

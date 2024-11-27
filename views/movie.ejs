@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= movie.title %></title>
+</head>
+<body>
+    <header>
+        <h1><%= movie.title %></h1>
+        <button onclick="location.href='/find'">Back to Discover</button>
+    </header>
+
+    <main>
+        <!-- Movie Poster -->
+        <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %> Poster">
+
+        <!-- Movie Information -->
+        <section>
+            <p><strong>Release Date:</strong> <%= movie.release_date %></p>
+            <p><strong>Overview:</strong> <%= movie.overview %></p>
+            <p><strong>Rating:</strong> <%= movie.vote_average %> / 10</p>
+        </section>
+
+        <!-- Add to Lists -->
+        <section>
+            <form action="/watchlist" method="POST">
+                <input type="hidden" name="movie_id" value="<%= movie.id %>">
+                <button type="submit">Add to Watchlist</button>
+            </form>
+
+            <form action="/wishlist" method="POST">
+                <input type="hidden" name="movie_id" value="<%= movie.id %>">
+                <button type="submit">Add to Wishlist</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
