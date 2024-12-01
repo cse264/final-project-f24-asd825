@@ -23,7 +23,8 @@ passport.use(new LocalStrategy(
         console.log('Incorrect password.' )
         return done(null, false, { message: 'Incorrect password.' });
       }
-      console.log("done")
+      console.log(user)
+      
       return done(null, user);
     } catch (err) {
         console.log("err")
@@ -41,7 +42,6 @@ passport.use(new JwtStrategy(
     try {
       const res = await query('SELECT * FROM users WHERE id = $1', [jwtPayload.id]);
       const user = res.rows[0];
-      console.log("wtf", user?true:false, user)
       if (user) {
         console.log("11212")
         return done(null, user);

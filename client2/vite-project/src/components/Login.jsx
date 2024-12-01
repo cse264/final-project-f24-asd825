@@ -6,21 +6,21 @@ import { TextInput, PasswordInput, Button, Paper, Title, Stack, Container } from
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, login, logout } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  // Redirect authenticated users
   useEffect(() => {
     if (user) {
-      logout();
+      navigate('/protected'); // Redirect to the protected page if already logged in
     }
-  }, []);
+  }, [user, navigate]); // Re-run when `user` changes
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await login(email, password);
     if (success) {
-        console.log(123)
-      navigate('/protected');
+      navigate('/protected'); // Redirect after successful login
     }
   };
 

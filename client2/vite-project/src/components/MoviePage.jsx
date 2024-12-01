@@ -19,11 +19,17 @@ import {
     const [rating, setRating] = useState(2.5);
 
     const fetchUrl = `http://localhost:5000/movies/${id}`
+    const watchListUrl = `http://localhost:5000/watchlist/${id}`
     useEffect(() => {
         const fetchMovies = async () => {
           try {
+            const watchlist = await axios.get(watchListUrl);
             const res = await axios.get(fetchUrl);
             console.log(res)
+            if (watchlist.data){
+              setIsInWatchlist(true)
+              setRating(watchlist.data.rating)
+            }
             setMovie(res.data);    
           } catch (error) {
             console.error("Failed to fetch movies:", error);
@@ -34,10 +40,31 @@ import {
       }, []);
   
     // Function to handle button click (add/remove from watchlist)
-    const handleWatchlistClick = () => {
-      setIsInWatchlist((prevState) => !prevState); // Toggle the watchlist state
-      axios.post(`http://localhost:5000/watchlist/${id}`,{rating: rating})
-      
+    const handleWatchlistClick = async () => {
+      try {
+        if (isInWatchlist) {
+          // If the item is already in the watchlist, send a DELETE request to remove it
+          const response = await axios.delete(`http://localhost:5000/watchlist/${id}`);
+          
+          if (response.status === 200) {
+            setIsInWatchlist(false); // Update state to reflect removal
+          } else {
+            console.error('Error removing from watchlist:', response);
+          }
+        } else {
+          // If the item is not in the watchlist, send a POST request to add it
+          const response = await axios.post(`http://localhost:5000/watchlist/${id}`, { rating });
+    
+          if (response.status === 200) {
+            setIsInWatchlist(true); // Update state to reflect addition
+          } else {
+            console.error('Error adding to watchlist:', response);
+          }
+        }
+      } catch (error) {
+        // Handle any errors that occur during the request
+        console.error('Error making request to watchlist:', error);
+      }
     };
   
     return (

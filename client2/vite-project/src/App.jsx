@@ -6,9 +6,15 @@ import Register from './components/Register';
 import Protected from './components/Protected';
 import AppLayout from './components/AppLayout';
 import MoviePage from './components/MoviePage';
+import AdminPage from './components/admin';
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user, authLoading } = useContext(AuthContext);
+
+  if (authLoading) {
+    return <div>Loading...</div>; // Replace with a better loading component if needed
+  }
+
   return user ? children : <Navigate to="/login" />;
 };
 
@@ -17,11 +23,34 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={ <AppLayout />}>
+          {/* Use AppLayout for all routes */}
+          <Route path="/" element={<AppLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="protected" element={<PrivateRoute><Protected /> </PrivateRoute>} />
-            <Route path="/movie/:id" element={<PrivateRoute> <MoviePage /> </PrivateRoute>}/>  
+            <Route
+              path="protected"
+              element={
+                <PrivateRoute>
+                  <Protected />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/movie/:id"
+              element={
+                <PrivateRoute>
+                  <MoviePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoute>
+                  <AdminPage />
+                </PrivateRoute>
+              }
+            />
           </Route>
         </Routes>
       </Router>

@@ -75,7 +75,6 @@ app.get('/protected', passport.authenticate('jwt', { session: false }), (req, re
 });
 // Geta popular movies using  TMDB api
 app.get('/movies/popular', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  // Return the authenticated user's information
   const fetchUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=692b454954cc64268bd2ce496bd63f1e'
   try {
     const response = await fetch(fetchUrl);
@@ -90,7 +89,6 @@ app.get('/movies/popular', passport.authenticate('jwt', { session: false }), asy
 
 
 app.get('/movies/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  // Return the authenticated user's information
   const id = req.params.id
   console.log(id)
   const fetchUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=692b454954cc64268bd2ce496bd63f1e`
@@ -107,6 +105,8 @@ app.get('/movies/:id', passport.authenticate('jwt', { session: false }), async (
 });
 
 
+
+
 app.post('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   // Return the authenticated user's information
   const movieId = req.params.tmdb_id
@@ -115,13 +115,39 @@ app.post('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false })
   try {
     const result = await query("INSERT INTO watchedlist (tmdb_id, rating, user_id) VALUES ($1, $2, $3) RETURNING *",
         [movieId, rating, userId])
-    res.status(200)
+    res.status(200).send()
   } catch (error) {
     console.log(error)
     res.status(400).send()
   }
   
 });
+
+app.delete('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  // Get the movie ID from the URL and user ID from the authenticated user
+  const movieId = req.params.tmdb_id;
+  const userId = req.user.id;
+
+  try { 
+    // Perform the DELETE operation on the database
+    const result = await query(
+      "DELETE FROM watchedlist WHERE tmdb_id = $1 AND user_id = $2 RETURNING *", 
+      [movieId, userId]
+    );
+    
+    // If no record was found and deleted, return a 404
+    if (result.rowCount === 0) {
+      return res.status(404).send('Movie not found in the watchlist.');
+    }
+
+    // Send a success response
+    res.status(200).send('Movie removed from the watchlist.');
+  } catch (error) {
+    console.log(error);
+    res.status(400).send('An error occurred while removing the movie.');
+  }
+});
+
 
 
 // Note: Movie table should include all necessary information for each movie, but I don't think it is configured to include it
@@ -168,6 +194,87 @@ app.get('/watchlist', passport.authenticate('jwt', { session: false }), async (r
     res.status(400).send();
   }
 });
+
+app.get('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const userId = req.user.id;
+  const movieId = req.params.tmdb_id;
+
+  try {
+    // Fetch the user's watchlist from the database
+    const result = await query("SELECT * FROM watchedlist WHERE user_id = $1 AND tmdb_id = $2", [userId, movieId]);
+    const watchlist = result.rows;
+    console.log(watchlist.rating)
+    res.json(watchlist[0])
+
+  
+  } catch (error) {
+    console.error("Error fetching watchlist or movie details:", error);
+    res.status(400).send();
+  }
+});
+
+
+// get all users
+app.get("/admin/users",  passport.authenticate('jwt', { session: false }),  async (req, res) => {
+  if (req.user.user_type) {
+    try {
+      // Only select necessary fields (e.g., id, name, email, user_type)
+      const result = await query("SELECT id, email, first_name, last_name, user_type FROM users");
+      res.json(result.rows);
+    } catch (err) {
+      console.error("Error getting all users:", err);
+      res.status(500).send("Error getting all users.");
+    }
+  } else {
+    res.status(401).send("Unauthorized. Admin access required.");
+  }
+});
+
+
+app.put('/admin/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if (req.user.user_type) {
+    const { id } = req.params;
+    const { email, first_name, last_name, user_type } = req.body;
+    
+    try {
+      const result = await query(
+        `UPDATE users SET email = $1, first_name = $2, last_name = $3, user_type = $4 WHERE id = $5 RETURNING *`,
+        [email, first_name, last_name, user_type, id]
+      );
+      if (result.rowCount === 0) {
+        return res.status(404).send('User not found.');
+      }
+      res.status(200).send('User updated.');
+    } catch (err) {
+      console.error('Error updating user:', err);
+      res.status(500).send('Error updating user.');
+    }
+  } else {
+    res.status(401).send('Unauthorized. Admin access required.');
+  }
+});
+
+
+app.delete('/admin/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  if (req.user.user_type) {
+    const { id } = req.params;
+    
+    try {
+      const result = await query(`DELETE FROM users WHERE id = $1 RETURNING *`, [id]);
+      if (result.rowCount === 0) {
+        return res.status(404).send('User not found.');
+      }
+      res.status(200).send('User deleted.');
+    } catch (err) {
+      console.error('Error deleting user:', err);
+      res.status(500).send('Error deleting user.');
+    }
+  } else {
+    res.status(401).send('Unauthorized. Admin access required.');
+  }
+});
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

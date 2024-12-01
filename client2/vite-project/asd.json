@@ -1,0 +1,127 @@
+{
+    "data": {
+        "adult": false,
+        "backdrop_path": "/tElnmtQ6yz1PjN1kePNl8yMSb59.jpg",
+        "belongs_to_collection": {
+            "id": 1241984,
+            "name": "Moana Collection",
+            "poster_path": "/hiGRhPYMKU8aXfxmSD7lqJNSzJG.jpg",
+            "backdrop_path": "/4OgaftFNqtE1UvfDDb2Eov7A5Rz.jpg"
+        },
+        "budget": 150000000,
+        "genres": [
+            {
+                "id": 16,
+                "name": "Animation"
+            },
+            {
+                "id": 12,
+                "name": "Adventure"
+            },
+            {
+                "id": 10751,
+                "name": "Family"
+            },
+            {
+                "id": 35,
+                "name": "Comedy"
+            }
+        ],
+        "homepage": "https://movies.disney.com/moana-2",
+        "id": 1241982,
+        "imdb_id": "tt13622970",
+        "origin_country": [
+            "US"
+        ],
+        "original_language": "en",
+        "original_title": "Moana 2",
+        "overview": "After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.",
+        "popularity": 5086.574,
+        "poster_path": "/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
+        "production_companies": [
+            {
+                "id": 2,
+                "logo_path": "/wdrCwmRnLFJhEoH8GSfymY85KHT.png",
+                "name": "Walt Disney Pictures",
+                "origin_country": "US"
+            },
+            {
+                "id": 6125,
+                "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
+                "name": "Walt Disney Animation Studios",
+                "origin_country": "US"
+            },
+            {
+                "id": 158526,
+                "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
+                "name": "Walt Disney Animation Studios",
+                "origin_country": "CA"
+            }
+        ],
+        "production_countries": [
+            {
+                "iso_3166_1": "CA",
+                "name": "Canada"
+            },
+            {
+                "iso_3166_1": "US",
+                "name": "United States of America"
+            }
+        ],
+        "release_date": "2024-11-27",
+        "revenue": 109600000,
+        "runtime": 100,
+        "spoken_languages": [
+            {
+                "english_name": "English",
+                "iso_639_1": "en",
+                "name": "English"
+            }
+        ],
+        "status": "Released",
+        "tagline": "The ocean is calling them back.",
+        "title": "Moana 2",
+        "video": false,
+        "vote_average": 7.1,
+        "vote_count": 144
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+        "content-length": "1609",
+        "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+        "transitional": {
+            "silentJSONParsing": true,
+            "forcedJSONParsing": true,
+            "clarifyTimeoutError": false
+        },
+        "adapter": [
+            "xhr",
+            "http",
+            "fetch"
+        ],
+        "transformRequest": [
+            null
+        ],
+        "transformResponse": [
+            null
+        ],
+        "timeout": 0,
+        "xsrfCookieName": "XSRF-TOKEN",
+        "xsrfHeaderName": "X-XSRF-TOKEN",
+        "maxContentLength": -1,
+        "maxBodyLength": -1,
+        "env": {},
+        "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMzMDE3NjUyLCJleHAiOjE3MzMwMjEyNTJ9.jGixEVa2ExUGVrgRTXldxVDvbiruN8DlGMnbHTS2mG4"
+        },
+        "baseURL": "http://localhost:5000",
+        "withCredentials": true,
+        "method": "get",
+        "url": "http://localhost:5000/movies/1241982"
+    },
+    "request": {}
+}
