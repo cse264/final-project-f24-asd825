@@ -317,8 +317,11 @@ passport.use(
   const getUserIDByEmail = async (email) => {
     return db.query("SELECT id FROM users WHERE email = $1", [email]);
   };
+
   //get the watchedlist
-  app.get("/watchedlist", async (req, res) => {
+
+
+  app.get("/watchlist", async (req, res) => {
     if (!req.isAuthenticated()) {
       res.redirect("/register/signin");
       return;
@@ -336,43 +339,34 @@ passport.use(
       );
   
       // Send JSON response (or render a frontend page if needed)
-      res.json(result.rows);
+      // res.json(result.rows);
+      res.render("watchlist.ejs", { watchlist: result.rows }); // FRONTEND
     } catch (err) {
       console.error("Error getting watchedlist:", err);
       res.status(500).send("Error getting watched list.");
     }
-  });
+  }
+  );
 
-  // Another way in case the first one doesn't work (for the watchedlist)
+  // get movie title by tmdb id
+  const getMovieTitle = async (tmdbId) => {
+    const url = `https://api.themoviedb.org/3/movie/${tmdbId}?language=en-US`;
 
-  // app.get("/watchedlist", async (req, res) => {
-  //   if (!req.isAuthenticated()) {
-  //     res.redirect("/register/signin");
-  //     return;
-  //   }
-  
-  //   try {
-  //     const email = req.user.email;
-  
-  //     // Query watchedlist using a JOIN to fetch by email directly
-  //     const result = await db.query(
-  //       "SELECT w.* FROM watchedlist w JOIN users u ON w.user_id = u.id WHERE u.email = $1",
-  //       [email]
-  //     );
-  
-  //     if (result.rows.length === 0) {
-  //       res.status(404).send("No watched items found.");
-  //       return;
-  //     }
-  
-  //     // Send JSON response (or render EJS)
-  //     res.json(result.rows);
-  //     // res.render("watchedlist.ejs", { watchedlist: result.rows }); // FRONTEND
-  //   } catch (err) {
-  //     console.error("Error getting watchedlist:", err);
-  //     res.status(500).send("Error getting watched list.");
-  //   }
-  // });
+    const options = {
+        headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+        }
+    };
+
+    try {
+        const response = await axios.get(url, options);
+        return response.data.title;
+    } catch (error) {
+        console.error("Error fetching movie data:", error);
+    }
+};
+
 
   //get the wishlist
 
@@ -394,7 +388,8 @@ passport.use(
       );
   
       // Send JSON response (or render a frontend page if needed)
-      res.json(result.rows);
+      // res.json(result.rows);
+      res.render("wishlist.ejs", { wishlist: result.rows }); // FRONTEND
     } catch (err) {
       console.error("Error getting wishlist:", err);
       res.status(500).send("Error getting wish list.");
@@ -433,29 +428,30 @@ passport.use(
   // });
 
   //add a movie to the watchedlist
-  app.post("/watchedlist", async (req, res) => {
+  app.post("/watchlist", async (req, res) => {
     if (!req.isAuthenticated()) {
-      res.redirect("/register/signin");
-      return;
+        res.redirect("/register/signin");
+        return;
     }
-  
+
     try {
-      const email = req.user.email;
-      const userId = (await getUserIDByEmail(email)).rows[0].id;
-      const movieId = req.body.movie_id;
-      const rating = req.body.rating;
-  
-      const result = await db.query(
-        "INSERT INTO watchedlist (tmdb_id, rating, user_id) VALUES ($1, $2, $3) RETURNING *",
-        [movieId, rating, userId]
-      );
-  
-      res.json(result.rows[0]);
+        const email = req.user.email;
+        const userId = (await getUserIDByEmail(email)).rows[0].id;
+        const movieId = req.body.movie_id; // Movie ID sent in the form
+
+        // Insert the movie into the watchlist
+        const result = await db.query(
+            "INSERT INTO watchedlist (tmdb_id, user_id) VALUES ($1, $2) RETURNING *",
+            [movieId, userId]
+        );
+
+        res.redirect("/watchlist"); // Redirect back to the watchlist page after adding
     } catch (err) {
-      console.error("Error adding movie to watchedlist:", err);
-      res.status(500).send("Error adding movie to watchedlist.");
+        console.error("Error adding movie to watchlist:", err);
+        res.status(500).send("Error adding movie to watchlist.");
     }
-  });
+});
+
 
   // if the first one doesn't work (for the watchedlist adding) TODO:
 

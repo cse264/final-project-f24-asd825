@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist</title>
+</head>
+<body>
+    <header>
+        <h1>Your Watchlist</h1>
+        <button onclick="location.href='/'">Back to Homepage</button>
+    </header>
+
+    <main>
+        <% if (watchlist.length > 0) { %>
+            <div id="watchlist-container">
+                <% watchlist.forEach(item => { %>
+                    <div class="watchlist-item">
+                        <!-- Movie Poster -->
+                        <a href="/title/<%= item.tmdb_id %>">
+                            <img src="https://image.tmdb.org/t/p/w200<%= item.poster_path %>" alt="<%= item.title %> Poster">
+                        </a>
+                        
+                        <!-- Movie Title -->
+                        <p><strong><%= item.title %></strong></p>
+
+                        <!-- Update Rating -->
+                        <form action="/watchlist/<%= item.tmdb_id %>" method="POST">
+                            <label for="rating-<%= item.tmdb_id %>">Update Rating:</label>
+                            <input type="number" id="rating-<%= item.tmdb_id %>" name="rating" min="1" max="10">
+                            <button type="submit">Update</button>
+                        </form>
+
+                        <!-- Remove Movie -->
+                        <form action="/watchlist/<%= item.tmdb_id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>Your watchlist is empty. Add some movies to get started!</p>
+        <% } %>
+    </main>
+</body>
+</html>
