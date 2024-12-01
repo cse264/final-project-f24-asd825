@@ -1,0 +1,589 @@
+:root {
+  --image-0: url(./graphics/graphics0.png);
+  --image-1: url(./graphics/graphics1.png);
+  --image-2: url(./graphics/graphics2.png);
+  --image-3: url(./graphics/graphics3.png);
+  --image-4: url(./graphics/graphics4.png);
+  --image-5: url(./graphics/graphics5.png);
+  --image-6: url(./graphics/graphics6.png);
+  --image-7: url(./graphics/graphics7.png);
+  --image-8: url(./graphics/graphics8.png);
+  --image-9: url(./graphics/graphics9.png);
+  --image-10: url(./graphics/graphics10.png);
+  --custom-width: 100vw;
+  --design-width: 1366;
+  --ratio: calc(var(--custom-width) / var(--design-width));
+}
+
+/* Default classes */
+.pos-abs {
+  position: absolute;
+}
+.fill-parent {
+  width: 100%;
+  height: 100%;
+}
+.bg-contain {
+  background-size: contain;
+}
+.bg-cover {
+  background-size: cover;
+}
+.bg-auto {
+  background-size: auto;
+}
+.bg-crop {
+  background-size: 100% 100%;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+.pos-init {
+  top: 0px;
+  left: 0px;
+}
+.image-div {
+  background-color: transparent;
+  background-position: center;
+}
+/* Default classes end */
+
+/* Default classes */
+.pos-abs {
+  position: absolute;
+}
+.fill-parent {
+  width: 100%;
+  height: 100%;
+}
+.bg-contain {
+  background-size: contain;
+}
+.bg-cover {
+  background-size: cover;
+}
+.bg-auto {
+  background-size: auto;
+}
+.bg-crop {
+  background-size: 100% 100%;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+.pos-init {
+  top: 0px;
+  left: 0px;
+}
+.image-div {
+  background-color: transparent;
+  background-position: center;
+}
+/* Default classes end */
+body {
+  margin: 0px 0px;
+  padding: 0px;
+}
+.parent-div {
+  position: relative;
+  width: var(--custom-width);
+  height: calc(768 * var(--ratio));
+  overflow: hidden;
+  margin: auto;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.sign-up-15 {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+  background: #2148c0ff;
+}
+.bg-16 {
+  width: 122.22%;
+  height: 141.02%;
+  top: -0.13%;
+  left: -26.5%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+}
+.nodeBg-110 {
+  opacity: 1;
+  background-image: var(--image-0);
+}
+.vector-110 {
+  width: 51.75%;
+  height: 66.53%;
+  top: 0.09%;
+  left: 48.25%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.ellipse-17 {
+  width: 43.37%;
+  height: 66.85%;
+  top: 33.15%;
+  left: 0%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  border-radius: 50%;
+  background: #264ecaff;
+}
+.ellipse-18 {
+  width: 34.26%;
+  height: 52.82%;
+  top: 40.17%;
+  left: 4.55%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  border-radius: 50%;
+  background: #244bc5ff;
+}
+.ellipse-19 {
+  width: 26.24%;
+  height: 40.44%;
+  top: 46.35%;
+  left: 8.57%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+  border-radius: 50%;
+  background: #274fc7ff;
+}
+.group-31-136 {
+  width: 12.66%;
+  height: 23.45%;
+  top: 15.63%;
+  left: 42.97%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+}
+.nodeBg-137 {
+  opacity: 1;
+  background-image: var(--image-1);
+}
+.vector-22-137 {
+  width: 80.55%;
+  height: 90.4%;
+  top: -1.67%;
+  left: -1.73%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.nodeBg-138 {
+  opacity: 1;
+  background-image: var(--image-2);
+}
+.vector-23-138 {
+  width: 72.45%;
+  height: 26.42%;
+  top: 73.86%;
+  left: 27.84%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.form-111 {
+  width: 55.86%;
+  height: 56.71%;
+  top: 40.49%;
+  left: 3.73%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+}
+.username-112 {
+  width: 39.32%;
+  height: 10.33%;
+  top: 0%;
+  left: 60.68%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+}
+.rectangle-113,
+.rectangle-115,
+.rectangle-1128,
+.rectangle-1189 {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  border-radius: 4px 4px 4px 4px;
+  box-sizing: border-box;
+  border-left: 1px solid #ffffffff;
+  border-right: 1px solid #ffffffff;
+  border-top: 1px solid #ffffffff;
+  border-bottom: 1px solid #ffffffff;
+}
+.user-115,
+.user-117,
+.user-1130 {
+  width: 6.67%;
+  height: 44.44%;
+  top: 28.89%;
+  left: 4%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.nodeBg-117,
+.nodeBg-119,
+.nodeBg-1132 {
+  opacity: 1;
+  background-image: var(--image-3);
+}
+.vector-117,
+.vector-119,
+.vector-1132 {
+  width: 38.33%;
+  height: 38.33%;
+  top: 10%;
+  left: 30.83%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.nodeBg-116,
+.nodeBg-118,
+.nodeBg-1131 {
+  opacity: 1;
+  background-image: var(--image-4);
+}
+.vector-116,
+.vector-118,
+.vector-1131 {
+  width: 71.67%;
+  height: 30%;
+  top: 60%;
+  left: 14.17%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.first-name-114,
+.first-name-116 {
+  width: 29%;
+  height: 44.44%;
+  top: 28.89%;
+  left: 19.33%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}
+.first-name-114-0,
+.first-name-116-0,
+.last-name-1129-0,
+.email-1122-0,
+.password-1190-0 {
+  font-size: calc(14 * var(--ratio));
+
+  line-height: calc(20 * var(--ratio));
+
+  font-family: Montserrat;
+  font-weight: 300;
+
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: pre-wrap;
+  color: #ffffffff;
+}
+.username-114 {
+  width: 39.32%;
+  height: 10.33%;
+  top: 0%;
+  left: 60.68%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+}
+.username-1120 {
+  width: 39.32%;
+  height: 25.49%;
+  top: 14.7%;
+  left: 60.68%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+}
+.username-1127 {
+  width: 100%;
+  height: 40.54%;
+  top: 0%;
+  left: 0%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+}
+.last-name-1129 {
+  width: 27.33%;
+  height: 44.44%;
+  top: 28.89%;
+  left: 20%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}
+.rectangle-1121 {
+  width: 100%;
+  height: 40.54%;
+  top: 59.46%;
+  left: 0%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  border-radius: 4px 4px 4px 4px;
+  box-sizing: border-box;
+  border-left: 1px solid #ffffffff;
+  border-right: 1px solid #ffffffff;
+  border-top: 1px solid #ffffffff;
+  border-bottom: 1px solid #ffffffff;
+}
+.user-1123 {
+  width: 6.67%;
+  height: 18.02%;
+  top: 71.17%;
+  left: 4%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.mail-1169 {
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+}
+.nodeBg-I1169_5461625454 {
+  opacity: 1;
+  background-image: var(--image-5);
+}
+.icon-I1169_5461625454 {
+  width: 83.33%;
+  height: 66.67%;
+  top: 16.67%;
+  left: 8.33%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.nodeBg-1125,
+.nodeBg-1124 {
+  opacity: 1;
+  background-image: var(--image-6);
+}
+.vector-1125 {
+  width: 33.33%;
+  height: 33.33%;
+  top: 12.5%;
+  left: 33.33%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+  display: none;
+  box-sizing: border-box;
+}
+.vector-1124 {
+  width: 66.67%;
+  height: 25%;
+  top: 62.5%;
+  left: 16.67%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+  display: none;
+  box-sizing: border-box;
+}
+.email-1122 {
+  width: 15%;
+  height: 18.02%;
+  top: 71.17%;
+  left: 26.33%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}
+.login-btn-124 {
+  width: 100%;
+  height: 38.69%;
+  top: 61.31%;
+  left: 0%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+}
+.nodeBg-125 {
+  opacity: 1;
+  background-image: var(--image-7);
+}
+.rectangle-125 {
+  width: 40.37%;
+  height: 31.45%;
+  top: 0%;
+  left: 60.16%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.sign-up-1491 {
+  width: 9.17%;
+  height: 11.87%;
+  top: 7.72%;
+  left: 74.71%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}
+.sign-up-1491-0,
+.admin-sign-in-1493-0 {
+  font-size: calc(16 * var(--ratio));
+
+  line-height: calc(20 * var(--ratio));
+
+  font-family: Montserrat;
+  font-weight: 600;
+
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: pre-wrap;
+  color: #2148c0ff;
+}
+.nodeBg-1139 {
+  opacity: 1;
+  background-image: var(--image-8);
+}
+.rectangle-1139 {
+  width: 20.31%;
+  height: 29.08%;
+  top: 75.67%;
+  left: -0.52%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.admin-sign-in-1493 {
+  width: 16.51%;
+  height: 11.87%;
+  top: 81.9%;
+  left: 1.31%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}
+.password-1188 {
+  width: 21.96%;
+  height: 5.86%;
+  top: 65.89%;
+  left: 37.63%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+}
+.lock-1191 {
+  width: 7.11%;
+  height: 47.41%;
+  top: 26.67%;
+  left: 4%;
+  opacity: 1;
+  z-index: 2;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.nodeBg-1193,
+.nodeBg-1196 {
+  opacity: 1;
+  background-image: var(--image-9);
+}
+.vector-1193,
+.vector-1196 {
+  width: 46.35%;
+  height: 42.19%;
+  top: 5.99%;
+  left: 26.82%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.nodeBg-1192,
+.nodeBg-1195 {
+  opacity: 1;
+  background-image: var(--image-10);
+}
+.vector-1192,
+.vector-1195 {
+  width: 79.69%;
+  height: 50.52%;
+  top: 43.49%;
+  left: 10.16%;
+  opacity: 1;
+  z-index: 0;
+  transform: rotate(0deg);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.lock-1194 {
+  width: 7.11%;
+  height: 47.41%;
+  top: 26.67%;
+  left: 4%;
+  opacity: 1;
+  z-index: 3;
+  transform: rotate(0deg);
+  overflow: hidden;
+}
+.password-1190 {
+  width: 28.33%;
+  height: 44.44%;
+  top: 28.89%;
+  left: 19.67%;
+  opacity: 1;
+  z-index: 1;
+  transform: rotate(0deg);
+  text-align: center;
+  line-height: 0px;
+}

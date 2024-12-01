@@ -3,26 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Home</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #1e3a8a, #1e40af);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated PNG Background */
+        .background-png {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150%;
+            height: 150%;
+            background: url('/graphics/graphics0.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            animation: moveBackground 10s infinite alternate ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-10%, -10%) rotate(0deg);
+            }
+            50% {
+                transform: translate(10%, 10%) rotate(15deg);
+            }
+            100% {
+                transform: translate(-10%, -10%) rotate(0deg);
+            }
+        }
+
+        /* Floating Shapes */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 1; /* Above PNG but below content */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 1; /* Above PNG but below content */
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+        /* Navigation Bar */
+        nav {
+            width: 100%;
+            height: 60px;
+            background-color: #0f172a;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-icon {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+
+        .profile-icon img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-top: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 60%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            font-size: 16px;
+            margin-left: 10px;
+            flex: 1;
+        }
+
+        .search-bar input::placeholder {
+            color: #64748b;
+        }
+
+        .search-bar img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Add a Footer Placeholder if needed */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome, <%= user.first_name %>!</h1>
-        <!-- Navigation Buttons -->
-        <nav>
-            <button onclick="location.href='/profile'">Profile</button>
-            <button onclick="location.href='/wishlist'">Wishlist</button>
-            <button onclick="location.href='/watchlist'">Watchlist</button>
-        </nav>
-    </header>
+    <!-- Background Animated PNG -->
+    <div class="background-png"></div>
+
+    <!-- Navigation Bar -->
+    <nav>
+       
+        <a href="/watchlist">Watchlist</a>
+        <a href="/wishlist">Wishlist</a>
+    </nav>
 
     <!-- Search Bar -->
-    <main>
-        <form action="/find" method="GET">
-            <label for="search">Search for a movie:</label>
-            <input type="text" id="search" name="query" placeholder="Enter movie name..." required>
-            <button type="submit">Search</button>
+    <div class="search-container">
+        <form class="search-bar" action="/find" method="GET">
+            <img src="/graphics/searchicon.png" alt="Search Icon">
+            <input type="text" name="query" placeholder="Search for a movie" required>
         </form>
-    </main>
+    </div>
+
+   
+
+    <script>
+        // Automatically submit the form when pressing "Enter" in the search input
+        const searchBar = document.querySelector('.search-bar input');
+        searchBar.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default form submission
+                searchBar.closest('form').submit(); // Submit the form
+            }
+        });
+    </script>
 </body>
 </html>
