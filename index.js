@@ -372,29 +372,29 @@ passport.use(
 
   app.get("/wishlist", async (req, res) => {
     if (!req.isAuthenticated()) {
-      res.redirect("/register/signin");
-      return;
+        res.redirect("/register/signin");
+        return;
     }
-  
+
     try {
-      // Use req.user.id instead of req.params to ensure proper ownership of data
-      const email = req.user.email;
-      const userId = (await getUserIDByEmail(email)).rows[0].id;
-  
-      // Query the user's watched list
-      const result = await db.query(
-        "SELECT * FROM wishlist WHERE user_id = $1",
-        [userId]
-      );
-  
-      // Send JSON response (or render a frontend page if needed)
-      // res.json(result.rows);
-      res.render("wishlist.ejs", { wishlist: result.rows }); // FRONTEND
+        // Use req.user.id to ensure proper ownership of data
+        const email = req.user.email;
+        const userId = (await getUserIDByEmail(email)).rows[0].id;
+
+        // Query the user's wishlist
+        const result = await db.query(
+            "SELECT * FROM wishlist WHERE user_id = $1",
+            [userId]
+        );
+
+        // Render the wishlist template with the results
+        res.render("wishlist.ejs", { wishlist: result.rows });
     } catch (err) {
-      console.error("Error getting wishlist:", err);
-      res.status(500).send("Error getting wish list.");
+        console.error("Error getting wishlist:", err);
+        res.status(500).send("Error getting wishlist.");
     }
-  });
+});
+
 
   // Another way in case the first one doesn't work (for the wishlist)
 
@@ -468,13 +468,14 @@ passport.use(
       const email = req.user.email;
       const userId = (await getUserIDByEmail(email)).rows[0].id;
       const movieId = req.body.movie_id;
+      const title = await getMovieTitle(movieId);
   
       const result = await db.query(
-        "INSERT INTO wishlist (tmdb_id, user_id) VALUES ($1, $2) RETURNING *",
-        [movieId, userId]
-      );
+        "INSERT INTO wishlist (tmdb_id, user_id, title) VALUES ($1, $2, $3) RETURNING *",
+        [movieId, userId, title]
+    );
   
-      res.json(result.rows[0]);
+      res.redirect("/wishlist");
     } catch (err) {
       console.error("Error adding movie to wishlist:", err);
       res.status(500).send("Error adding movie to wishlist.");
@@ -485,7 +486,7 @@ passport.use(
 
 
   // remove a movie from the watchedlist
-  app.delete("/watchedlist/:movieId", async (req, res) => {
+  app.delete("/watchlist/:movieId", async (req, res) => {
     if (!req.isAuthenticated()) {
       res.redirect("/register/signin");
       return;

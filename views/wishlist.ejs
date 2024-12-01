@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+</head>
+<body>
+    <header>
+        <h1>Your Wishlist</h1>
+        <button onclick="location.href='/'">Back to Homepage</button>
+    </header>
+
+    <main>
+        <% if (wishlist.length > 0) { %>
+            <div id="wishlist-container">
+                <% wishlist.forEach(item => { %>
+                    <div class="wishlist-item">
+                        <!-- Movie Poster -->
+                        <a href="/title/<%= item.tmdb_id %>">
+                            <img src="https://image.tmdb.org/t/p/w200<%= item.poster_path %>" alt="<%= item.title %> Poster">
+                        </a>
+                        
+                        <!-- Movie Title -->
+                        <p><strong><%= item.title %></strong></p>
+
+                        <!-- Remove Movie -->
+                        <form action="/wishlist/<%= item.tmdb_id %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p>Your wishlist is empty. Add some movies to get started!</p>
+        <% } %>
+    </main>
+</body>
+</html>
