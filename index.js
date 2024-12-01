@@ -438,11 +438,12 @@ passport.use(
         const email = req.user.email;
         const userId = (await getUserIDByEmail(email)).rows[0].id;
         const movieId = req.body.movie_id; // Movie ID sent in the form
+        const title = await getMovieTitle(movieId); // Fetch the movie title using the TMDB ID
 
         // Insert the movie into the watchlist
         const result = await db.query(
-            "INSERT INTO watchedlist (tmdb_id, user_id) VALUES ($1, $2) RETURNING *",
-            [movieId, userId]
+            "INSERT INTO watchedlist (tmdb_id, user_id, title) VALUES ($1, $2, $3) RETURNING *",
+            [movieId, userId, title]
         );
 
         res.redirect("/watchlist"); // Redirect back to the watchlist page after adding
