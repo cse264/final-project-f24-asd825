@@ -12,6 +12,9 @@ import { query } from './db/connectPostgres.js';
 import axios from 'axios';
 
 
+
+// NOTE: there is almost NO input validation. If you wrote a duplicate email, it will pass
+// TMDB api is exposed too 
 const app = express();
 app.use(logger('dev'));
 // Update cors configuration
@@ -42,7 +45,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-app.post('/login', (req, res, next) => {
+app.post('/login', (req, res) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err || !user) {
       return res.status(400).json({
@@ -75,10 +78,18 @@ app.get('/protected', passport.authenticate('jwt', { session: false }), (req, re
 });
 // Geta popular movies using  TMDB api
 app.get('/movies/popular', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  const fetchUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=692b454954cc64268bd2ce496bd63f1e'
+  const fetchUrl = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
   try {
-    const response = await fetch(fetchUrl);
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OTJiNDU0OTU0Y2M2NDI2OGJkMmNlNDk2YmQ2M2YxZSIsIm5iZiI6MTczMjc1ODE0MS40OCwic3ViIjoiNjc0N2NhN2QzNzliMDNhOWYxZDA1MTlhIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gmnqlSF7lsQkorFgFQfpwgOcfs2eqH25R-mQOy9ygew',
+      },
+    };
+    const response = await fetch(fetchUrl, options);
     const data = await response.json();
+    console.log(data)
     res.json(data.results);
   } catch (error) {
     console.log(error)
@@ -86,6 +97,46 @@ app.get('/movies/popular', passport.authenticate('jwt', { session: false }), asy
   }
   
 });
+
+
+app.get('/movies/search', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const { query } = req.query; // Extract 'query' parameter from the request
+
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OTJiNDU0OTU0Y2M2NDI2OGJkMmNlNDk2YmQ2M2YxZSIsIm5iZiI6MTczMjc1ODE0MS40OCwic3ViIjoiNjc0N2NhN2QzNzliMDNhOWYxZDA1MTlhIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gmnqlSF7lsQkorFgFQfpwgOcfs2eqH25R-mQOy9ygew',
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      return res.status(response.status).json({ error: `Error from TMDB: ${response.statusText}` });
+    }
+
+    const data = await response.json();
+
+    // Filter out movies with duplicate titles (Mantine search doesnt accept duplicate values. It can be fixed by including some dummy values (e.g id) and hiding it but I cba)
+    const uniqueMovies = [];
+    const titlesSet = new Set();
+
+    for (const movie of data.results) {
+      if (!titlesSet.has(movie.title)) {
+        uniqueMovies.push(movie);
+        titlesSet.add(movie.title);
+      }
+    }
+
+    res.json({ results: uniqueMovies }); // Return filtered results
+  } catch (error) {
+    console.error('Error fetching data from TMDB:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 app.get('/movies/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -103,6 +154,10 @@ app.get('/movies/:id', passport.authenticate('jwt', { session: false }), async (
   }
   
 });
+
+
+
+
 
 
 
@@ -187,7 +242,6 @@ app.get('/watchlist', passport.authenticate('jwt', { session: false }), async (r
     );
 
     // Filter out any null results due to failed fetches
-    console.log(moviesWithDetails)
     res.json(moviesWithDetails);
   } catch (error) {
     console.error("Error fetching watchlist or movie details:", error);
@@ -203,7 +257,6 @@ app.get('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false }),
     // Fetch the user's watchlist from the database
     const result = await query("SELECT * FROM watchedlist WHERE user_id = $1 AND tmdb_id = $2", [userId, movieId]);
     const watchlist = result.rows;
-    console.log(watchlist.rating)
     res.json(watchlist[0])
 
   
@@ -216,7 +269,7 @@ app.get('/watchlist/:tmdb_id', passport.authenticate('jwt', { session: false }),
 
 // get all users
 app.get("/admin/users",  passport.authenticate('jwt', { session: false }),  async (req, res) => {
-  if (req.user.user_type) {
+  if (req.user.user_type === "admin") {
     try {
       // Only select necessary fields (e.g., id, name, email, user_type)
       const result = await query("SELECT id, email, first_name, last_name, user_type FROM users");
@@ -232,7 +285,7 @@ app.get("/admin/users",  passport.authenticate('jwt', { session: false }),  asyn
 
 
 app.put('/admin/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  if (req.user.user_type) {
+  if (req.user.user_type === "admin") {
     const { id } = req.params;
     const { email, first_name, last_name, user_type } = req.body;
     
@@ -256,7 +309,7 @@ app.put('/admin/users/:id', passport.authenticate('jwt', { session: false }), as
 
 
 app.delete('/admin/users/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  if (req.user.user_type) {
+  if (req.user.user_type === "admin") {
     const { id } = req.params;
     
     try {
@@ -273,6 +326,48 @@ app.delete('/admin/users/:id', passport.authenticate('jwt', { session: false }),
     res.status(401).send('Unauthorized. Admin access required.');
   }
 });
+
+
+
+
+// Get profile
+app.get('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    const result = await query('SELECT id, first_name, last_name, email FROM users WHERE id = $1', [userId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error fetching profile:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update profile
+app.put('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  try {
+    const userId = req.user.id; 
+    const { first_name, last_name, email } = req.body; 
+
+    // Validate inputs 
+    if (!email || !first_name || !last_name) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const result = await query(
+      'UPDATE users SET first_name = $1, last_name = $2, email = $3 WHERE id = $4 RETURNING id, first_name, last_name, email',
+      [first_name, last_name, email, userId]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error updating profile:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 
 

@@ -1,127 +1,755 @@
-{
-    "data": {
-        "adult": false,
-        "backdrop_path": "/tElnmtQ6yz1PjN1kePNl8yMSb59.jpg",
-        "belongs_to_collection": {
-            "id": 1241984,
-            "name": "Moana Collection",
-            "poster_path": "/hiGRhPYMKU8aXfxmSD7lqJNSzJG.jpg",
-            "backdrop_path": "/4OgaftFNqtE1UvfDDb2Eov7A5Rz.jpg"
-        },
-        "budget": 150000000,
-        "genres": [
-            {
-                "id": 16,
-                "name": "Animation"
+[
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/tElnmtQ6yz1PjN1kePNl8yMSb59.jpg",
+            "belongs_to_collection": {
+                "id": 1241984,
+                "name": "Moana Collection",
+                "poster_path": "/hiGRhPYMKU8aXfxmSD7lqJNSzJG.jpg",
+                "backdrop_path": "/4OgaftFNqtE1UvfDDb2Eov7A5Rz.jpg"
             },
-            {
-                "id": 12,
-                "name": "Adventure"
-            },
-            {
-                "id": 10751,
-                "name": "Family"
-            },
-            {
-                "id": 35,
-                "name": "Comedy"
-            }
-        ],
-        "homepage": "https://movies.disney.com/moana-2",
-        "id": 1241982,
-        "imdb_id": "tt13622970",
-        "origin_country": [
-            "US"
-        ],
-        "original_language": "en",
-        "original_title": "Moana 2",
-        "overview": "After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.",
-        "popularity": 5086.574,
-        "poster_path": "/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
-        "production_companies": [
-            {
-                "id": 2,
-                "logo_path": "/wdrCwmRnLFJhEoH8GSfymY85KHT.png",
-                "name": "Walt Disney Pictures",
-                "origin_country": "US"
-            },
-            {
-                "id": 6125,
-                "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
-                "name": "Walt Disney Animation Studios",
-                "origin_country": "US"
-            },
-            {
-                "id": 158526,
-                "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
-                "name": "Walt Disney Animation Studios",
-                "origin_country": "CA"
-            }
-        ],
-        "production_countries": [
-            {
-                "iso_3166_1": "CA",
-                "name": "Canada"
-            },
-            {
-                "iso_3166_1": "US",
-                "name": "United States of America"
-            }
-        ],
-        "release_date": "2024-11-27",
-        "revenue": 109600000,
-        "runtime": 100,
-        "spoken_languages": [
-            {
-                "english_name": "English",
-                "iso_639_1": "en",
-                "name": "English"
-            }
-        ],
-        "status": "Released",
-        "tagline": "The ocean is calling them back.",
-        "title": "Moana 2",
-        "video": false,
-        "vote_average": 7.1,
-        "vote_count": 144
+            "budget": 150000000,
+            "genres": [
+                {
+                    "id": 16,
+                    "name": "Animation"
+                },
+                {
+                    "id": 12,
+                    "name": "Adventure"
+                },
+                {
+                    "id": 10751,
+                    "name": "Family"
+                },
+                {
+                    "id": 35,
+                    "name": "Comedy"
+                }
+            ],
+            "homepage": "https://movies.disney.com/moana-2",
+            "id": 1241982,
+            "imdb_id": "tt13622970",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "Moana 2",
+            "overview": "After receiving an unexpected call from her wayfinding ancestors, Moana journeys alongside Maui and a new crew to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.",
+            "popularity": 8094.42,
+            "poster_path": "/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
+            "production_companies": [
+                {
+                    "id": 2,
+                    "logo_path": "/wdrCwmRnLFJhEoH8GSfymY85KHT.png",
+                    "name": "Walt Disney Pictures",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 6125,
+                    "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
+                    "name": "Walt Disney Animation Studios",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 158526,
+                    "logo_path": "/tzsMJBJZINu7GHzrpYzpReWhh66.png",
+                    "name": "Walt Disney Animation Studios",
+                    "origin_country": "CA"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "CA",
+                    "name": "Canada"
+                },
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-11-27",
+            "revenue": 386700000,
+            "runtime": 100,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "The ocean is calling them back.",
+            "title": "Moana 2",
+            "video": false,
+            "vote_average": 7.165,
+            "vote_count": 206
+        }
     },
-    "status": 200,
-    "statusText": "OK",
-    "headers": {
-        "content-length": "1609",
-        "content-type": "application/json; charset=utf-8"
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+            "belongs_to_collection": {
+                "id": 558216,
+                "name": "Venom Collection",
+                "poster_path": "/4bXIKqdZIjR8wKgZaGDaLhLj4yF.jpg",
+                "backdrop_path": "/vq340s8DxA5Q209FT8PHA6CXYOx.jpg"
+            },
+            "budget": 120000000,
+            "genres": [
+                {
+                    "id": 878,
+                    "name": "Science Fiction"
+                },
+                {
+                    "id": 28,
+                    "name": "Action"
+                },
+                {
+                    "id": 12,
+                    "name": "Adventure"
+                }
+            ],
+            "homepage": "https://venom.movie",
+            "id": 912649,
+            "imdb_id": "tt16366836",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "Venom: The Last Dance",
+            "overview": "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance.",
+            "popularity": 3631.203,
+            "poster_path": "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+            "production_companies": [
+                {
+                    "id": 5,
+                    "logo_path": "/71BqEFAF4V3qjjMPCpLuyJFB9A.png",
+                    "name": "Columbia Pictures",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 84041,
+                    "logo_path": "/nw4kyc29QRpNtFbdsBHkRSFavvt.png",
+                    "name": "Pascal Pictures",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 53462,
+                    "logo_path": "/nx8B3Phlcse02w86RW4CJqzCnfL.png",
+                    "name": "Matt Tolmach Productions",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 91797,
+                    "logo_path": null,
+                    "name": "Hutch Parker Entertainment",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 14439,
+                    "logo_path": null,
+                    "name": "Arad Productions",
+                    "origin_country": "US"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-10-22",
+            "revenue": 468425476,
+            "runtime": 109,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "'Til death do they part.",
+            "title": "Venom: The Last Dance",
+            "video": false,
+            "vote_average": 6.446,
+            "vote_count": 968
+        }
     },
-    "config": {
-        "transitional": {
-            "silentJSONParsing": true,
-            "forcedJSONParsing": true,
-            "clarifyTimeoutError": false
-        },
-        "adapter": [
-            "xhr",
-            "http",
-            "fetch"
-        ],
-        "transformRequest": [
-            null
-        ],
-        "transformResponse": [
-            null
-        ],
-        "timeout": 0,
-        "xsrfCookieName": "XSRF-TOKEN",
-        "xsrfHeaderName": "X-XSRF-TOKEN",
-        "maxContentLength": -1,
-        "maxBodyLength": -1,
-        "env": {},
-        "headers": {
-            "Accept": "application/json, text/plain, */*",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzMzMDE3NjUyLCJleHAiOjE3MzMwMjEyNTJ9.jGixEVa2ExUGVrgRTXldxVDvbiruN8DlGMnbHTS2mG4"
-        },
-        "baseURL": "http://localhost:5000",
-        "withCredentials": true,
-        "method": "get",
-        "url": "http://localhost:5000/movies/1241982"
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/5O0mkQGfOQM4OktFOCep9YmXK79.jpg",
+            "belongs_to_collection": null,
+            "budget": 0,
+            "genres": [
+                {
+                    "id": 28,
+                    "name": "Action"
+                },
+                {
+                    "id": 878,
+                    "name": "Science Fiction"
+                },
+                {
+                    "id": 53,
+                    "name": "Thriller"
+                },
+                {
+                    "id": 35,
+                    "name": "Comedy"
+                },
+                {
+                    "id": 27,
+                    "name": "Horror"
+                }
+            ],
+            "homepage": "",
+            "id": 995803,
+            "imdb_id": "tt14132588",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "Arena Wars",
+            "overview": "In 2045 convicted criminals are given the opportunity to compete on the world's #1 televised sporting event, Arena Wars. They must survive 7 rooms and 7 of the most vicious killers in the country. If they win, they regain their freedom.",
+            "popularity": 1131.813,
+            "poster_path": "/4dRtXjk1rcsZlaMJpBn6Nh9cTfO.jpg",
+            "production_companies": [
+                {
+                    "id": 109416,
+                    "logo_path": null,
+                    "name": "Mahal Empire",
+                    "origin_country": ""
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-06-25",
+            "revenue": 0,
+            "runtime": 96,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "The only way to live...is to kill.",
+            "title": "Arena Wars",
+            "video": false,
+            "vote_average": 5.2,
+            "vote_count": 23
+        }
     },
-    "request": {}
-}
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/mQZJoIhTEkNhCYAqcHrQqhENLdu.jpg",
+            "belongs_to_collection": {
+                "id": 1370345,
+                "name": "The Wild Robot Collection",
+                "poster_path": "/cioNnsPSHJH9gsUSETPFHh0m6MT.jpg",
+                "backdrop_path": "/f6G8QPeod5ngQMs5Fe1O4LdphB7.jpg"
+            },
+            "budget": 78000000,
+            "genres": [
+                {
+                    "id": 16,
+                    "name": "Animation"
+                },
+                {
+                    "id": 878,
+                    "name": "Science Fiction"
+                },
+                {
+                    "id": 10751,
+                    "name": "Family"
+                }
+            ],
+            "homepage": "https://www.thewildrobotmovie.com",
+            "id": 1184918,
+            "imdb_id": "tt29623480",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "The Wild Robot",
+            "overview": "After a shipwreck, an intelligent robot called Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose.",
+            "popularity": 1931.552,
+            "poster_path": "/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+            "production_companies": [
+                {
+                    "id": 521,
+                    "logo_path": "/3BPX5VGBov8SDqTV7wC1L1xShAS.png",
+                    "name": "DreamWorks Animation",
+                    "origin_country": "US"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-09-12",
+            "revenue": 317414420,
+            "runtime": 102,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "Discover your true nature.",
+            "title": "The Wild Robot",
+            "video": false,
+            "vote_average": 8.4,
+            "vote_count": 3253
+        }
+    },
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/2fxnTXr8NwyTFkunkimJkGkhqfy.jpg",
+            "belongs_to_collection": null,
+            "budget": 0,
+            "genres": [
+                {
+                    "id": 18,
+                    "name": "Drama"
+                },
+                {
+                    "id": 28,
+                    "name": "Action"
+                },
+                {
+                    "id": 27,
+                    "name": "Horror"
+                }
+            ],
+            "homepage": "https://nostromopictures.com/en/movies/coming-soon/apocalipsis-z-el-principio-del-fin",
+            "id": 1118031,
+            "imdb_id": "tt27599851",
+            "origin_country": [
+                "ES"
+            ],
+            "original_language": "es",
+            "original_title": "Apocalipsis Z: el principio del fin",
+            "overview": "When a kind of rabies that transforms people into aggressive creatures spreads across the planet, Manel isolates himself at home with his cat, relying on his wits to survive; but soon they must go out in search of food, by land and by sea, dodging many dangers.",
+            "popularity": 1393.045,
+            "poster_path": "/wIGJnIFQlESkC2rLpfA8EDHqk4g.jpg",
+            "production_companies": [
+                {
+                    "id": 11068,
+                    "logo_path": "/jOdUllzDZRFy0tPIFDEwpP4Mpv4.png",
+                    "name": "Nostromo Pictures",
+                    "origin_country": "ES"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "ES",
+                    "name": "Spain"
+                }
+            ],
+            "release_date": "2024-10-04",
+            "revenue": 0,
+            "runtime": 119,
+            "spoken_languages": [
+                {
+                    "english_name": "Arabic",
+                    "iso_639_1": "ar",
+                    "name": "العربية"
+                },
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                },
+                {
+                    "english_name": "French",
+                    "iso_639_1": "fr",
+                    "name": "Français"
+                },
+                {
+                    "english_name": "Galician",
+                    "iso_639_1": "gl",
+                    "name": "Galego"
+                },
+                {
+                    "english_name": "German",
+                    "iso_639_1": "de",
+                    "name": "Deutsch"
+                },
+                {
+                    "english_name": "Portuguese",
+                    "iso_639_1": "pt",
+                    "name": "Português"
+                },
+                {
+                    "english_name": "Russian",
+                    "iso_639_1": "ru",
+                    "name": "Pусский"
+                },
+                {
+                    "english_name": "Spanish",
+                    "iso_639_1": "es",
+                    "name": "Español"
+                }
+            ],
+            "status": "Released",
+            "tagline": "The beginning of the end has arrived.",
+            "title": "Apocalypse Z: The Beginning of the End",
+            "video": false,
+            "vote_average": 6.808,
+            "vote_count": 627
+        }
+    },
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/nazLAYvFewST34QMueOq4MlYKoc.jpg",
+            "belongs_to_collection": {
+                "id": 968080,
+                "name": "Wicked Collection",
+                "poster_path": "/b9xo966oVIrFtpevhLQ9XILcXTh.jpg",
+                "backdrop_path": "/xFcLusbzDM86mla4vjdEBHi7jLW.jpg"
+            },
+            "budget": 145000000,
+            "genres": [
+                {
+                    "id": 18,
+                    "name": "Drama"
+                },
+                {
+                    "id": 14,
+                    "name": "Fantasy"
+                },
+                {
+                    "id": 10749,
+                    "name": "Romance"
+                }
+            ],
+            "homepage": "https://www.wickedmovie.com",
+            "id": 402431,
+            "imdb_id": "tt1262426",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "Wicked",
+            "overview": "When ostracized and misunderstood green-skinned Elphaba is forced to share a room with the popular aristocrat Glinda, the two's unlikely friendship is tested as they begin to fulfill their respective destinies as Glinda the Good and the Wicked Witch of the West.",
+            "popularity": 1448.518,
+            "poster_path": "/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
+            "production_companies": [
+                {
+                    "id": 33,
+                    "logo_path": "/3wwjVpkZtnog6lSKzWDjvw2Yi00.png",
+                    "name": "Universal Pictures",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 2527,
+                    "logo_path": "/osO7TGmlRMistSQ5JZusPhbKUHk.png",
+                    "name": "Marc Platt Productions",
+                    "origin_country": "US"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-11-20",
+            "revenue": 359326510,
+            "runtime": 161,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "Everyone deserves the chance to fly.",
+            "title": "Wicked",
+            "video": false,
+            "vote_average": 7.587,
+            "vote_count": 329
+        }
+    },
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/18TSJF1WLA4CkymvVUcKDBwUJ9F.jpg",
+            "belongs_to_collection": {
+                "id": 727761,
+                "name": "Terrifier Collection",
+                "poster_path": "/4xIzrMcEvCzJm5qAl92WMHLSIeM.jpg",
+                "backdrop_path": "/zREjCmCHIHdEF6ufPoDQjhl4Wdm.jpg"
+            },
+            "budget": 2000000,
+            "genres": [
+                {
+                    "id": 27,
+                    "name": "Horror"
+                },
+                {
+                    "id": 53,
+                    "name": "Thriller"
+                }
+            ],
+            "homepage": "https://terrifier3.com/",
+            "id": 1034541,
+            "imdb_id": "tt27911000",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_title": "Terrifier 3",
+            "overview": "Five years after surviving Art the Clown's Halloween massacre, Sienna and Jonathan are still struggling to rebuild their shattered lives. As the holiday season approaches, they try to embrace the Christmas spirit and leave the horrors of the past behind. But just when they think they're safe, Art returns, determined to turn their holiday cheer into a new nightmare. The festive season quickly unravels as Art unleashes his twisted brand of terror, proving that no holiday is safe.",
+            "popularity": 1273.862,
+            "poster_path": "/l1175hgL5DoXnqeZQCcU3eZIdhX.jpg",
+            "production_companies": [
+                {
+                    "id": 238902,
+                    "logo_path": "/jLAg5fOlAw1Jl8Q7WoyKxh1H22y.png",
+                    "name": "Cineverse",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 15157,
+                    "logo_path": "/yezzLb9RbKNtQUsyYySAqC9TQr7.png",
+                    "name": "Bloody Disgusting",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 84591,
+                    "logo_path": null,
+                    "name": "Dark Age Cinema",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 114220,
+                    "logo_path": "/b5n3DtfUySREkq4Xi962zMg69qq.png",
+                    "name": "Fuzz on the Lens Productions",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 213025,
+                    "logo_path": "/bFz17QGqfF8wiQAH3T4kfzKC8dU.png",
+                    "name": "The Coven",
+                    "origin_country": "US"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2024-10-09",
+            "revenue": 87261211,
+            "runtime": 125,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "A december to dismember",
+            "title": "Terrifier 3",
+            "video": false,
+            "vote_average": 6.9,
+            "vote_count": 1162
+        }
+    },
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
+            "belongs_to_collection": null,
+            "budget": 160000000,
+            "genres": [
+                {
+                    "id": 28,
+                    "name": "Action"
+                },
+                {
+                    "id": 878,
+                    "name": "Science Fiction"
+                },
+                {
+                    "id": 12,
+                    "name": "Adventure"
+                }
+            ],
+            "homepage": "https://www.warnerbros.com/movies/inception",
+            "id": 27205,
+            "imdb_id": "tt1375666",
+            "origin_country": [
+                "US",
+                "GB"
+            ],
+            "original_language": "en",
+            "original_title": "Inception",
+            "overview": "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a target's subconscious.",
+            "popularity": 104.332,
+            "poster_path": "/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg",
+            "production_companies": [
+                {
+                    "id": 923,
+                    "logo_path": "/8M99Dkt23MjQMTTWukq4m5XsEuo.png",
+                    "name": "Legendary Pictures",
+                    "origin_country": "US"
+                },
+                {
+                    "id": 9996,
+                    "logo_path": "/3tvBqYsBhxWeHlu62SIJ1el93O7.png",
+                    "name": "Syncopy",
+                    "origin_country": "GB"
+                },
+                {
+                    "id": 174,
+                    "logo_path": "/zhD3hhtKB5qyv7ZeL4uLpNxgMVU.png",
+                    "name": "Warner Bros. Pictures",
+                    "origin_country": "US"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "GB",
+                    "name": "United Kingdom"
+                },
+                {
+                    "iso_3166_1": "US",
+                    "name": "United States of America"
+                }
+            ],
+            "release_date": "2010-07-15",
+            "revenue": 825532764,
+            "runtime": 148,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                },
+                {
+                    "english_name": "French",
+                    "iso_639_1": "fr",
+                    "name": "Français"
+                },
+                {
+                    "english_name": "Japanese",
+                    "iso_639_1": "ja",
+                    "name": "日本語"
+                },
+                {
+                    "english_name": "Swahili",
+                    "iso_639_1": "sw",
+                    "name": "Kiswahili"
+                }
+            ],
+            "status": "Released",
+            "tagline": "Your mind is the scene of the crime.",
+            "title": "Inception",
+            "video": false,
+            "vote_average": 8.4,
+            "vote_count": 36594
+        }
+    },
+    {
+        "movieDetails": {
+            "adult": false,
+            "backdrop_path": "/csQSGH0QU8D3Ov5YLEYuHep8ihA.jpg",
+            "belongs_to_collection": null,
+            "budget": 5270000,
+            "genres": [
+                {
+                    "id": 53,
+                    "name": "Thriller"
+                },
+                {
+                    "id": 12,
+                    "name": "Adventure"
+                },
+                {
+                    "id": 28,
+                    "name": "Action"
+                },
+                {
+                    "id": 878,
+                    "name": "Science Fiction"
+                }
+            ],
+            "homepage": "",
+            "id": 1196470,
+            "imdb_id": "tt27032708",
+            "origin_country": [
+                "FR"
+            ],
+            "original_language": "fr",
+            "original_title": "Survivre",
+            "overview": "A couple celebrates their son’s birthday in the middle of the ocean on their boat. A violent storm hits and it brings up hungry creatures from the depths and they fight for their survival.",
+            "popularity": 556.037,
+            "poster_path": "/7fR3KxswtY8OHHZuOUB9td58CRX.jpg",
+            "production_companies": [
+                {
+                    "id": 58668,
+                    "logo_path": "/fQuxB2LBtBXObebsSWA17sW8zFT.png",
+                    "name": "M.E.S. Productions",
+                    "origin_country": "FR"
+                },
+                {
+                    "id": 8906,
+                    "logo_path": "/c5MDqS2UYtK0pTQqtYow7LSBLcS.png",
+                    "name": "Monkey Pack Films",
+                    "origin_country": "FR"
+                },
+                {
+                    "id": 91532,
+                    "logo_path": null,
+                    "name": "C8 Films",
+                    "origin_country": "FR"
+                }
+            ],
+            "production_countries": [
+                {
+                    "iso_3166_1": "FR",
+                    "name": "France"
+                }
+            ],
+            "release_date": "2024-06-19",
+            "revenue": 0,
+            "runtime": 90,
+            "spoken_languages": [
+                {
+                    "english_name": "English",
+                    "iso_639_1": "en",
+                    "name": "English"
+                }
+            ],
+            "status": "Released",
+            "tagline": "The world has gone sideways.",
+            "title": "Survive",
+            "video": false,
+            "vote_average": 5.879,
+            "vote_count": 70
+        }
+    }
+]

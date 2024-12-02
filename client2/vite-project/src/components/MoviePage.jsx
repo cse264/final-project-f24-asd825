@@ -16,7 +16,7 @@ import {
     const { id } = useParams();
     const [movie, setMovie] = useState({});
     const [isInWatchlist, setIsInWatchlist] = useState(false);
-    const [rating, setRating] = useState(2.5);
+    const [rating, setRating] = useState(0);
 
     const fetchUrl = `http://localhost:5000/movies/${id}`
     const watchListUrl = `http://localhost:5000/watchlist/${id}`
@@ -37,7 +37,7 @@ import {
         };
         
         fetchMovies();
-      }, []);
+      }, [id]);
   
     // Function to handle button click (add/remove from watchlist)
     const handleWatchlistClick = async () => {
@@ -114,7 +114,7 @@ import {
   
             {/* Rating Component */}
             <div style={{ marginTop: '20px' }}>
-              <Text size="sm" c="dimmed">Rating:</Text>
+              <Text size="sm" c="dimmed">Rate:</Text>
               <Rating
                 value={rating}
                 onChange={setRating}
