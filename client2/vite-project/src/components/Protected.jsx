@@ -24,7 +24,7 @@ const Protected = () => {
         </Title>
       </Center>
 
-      {/* Popular Movies Section */}
+      {/* Trending Movies Section */}
       <Card
         shadow="md"
         radius="lg"
@@ -46,8 +46,61 @@ const Protected = () => {
         >
           Trending Movies
         </Title>
-        <Demo />
+        <Demo url={"movies/trending"}/>
       </Card>
+
+       {/* Upcoming Movies Section */}
+       <Card
+        shadow="md"
+        radius="lg"
+        style={{
+          backgroundColor: '#1a1b1e',
+          color: '#fff',
+          padding: '20px',
+          marginBottom: '30px',
+        }}
+      >
+        <Title
+          order={3}
+          style={{
+            color: '#e0e0e0',
+            marginBottom: '15px',
+            borderBottom: '2px solid rgba(255, 255, 255, 0.2)',
+            paddingBottom: '8px',
+          }}
+        >
+          Upcoming Movies
+        </Title>
+        <Demo url={"movies/upcoming"}/>
+      </Card>
+      
+      
+       {/* Popular Movies Section */}
+       <Card
+        shadow="md"
+        radius="lg"
+        style={{
+          backgroundColor: '#1a1b1e',
+          color: '#fff',
+          padding: '20px',
+          marginBottom: '30px',
+        }}
+      >
+        <Title
+          order={3}
+          style={{
+            color: '#e0e0e0',
+            marginBottom: '15px',
+            borderBottom: '2px solid rgba(255, 255, 255, 0.2)',
+            paddingBottom: '8px',
+          }}
+        >
+          Top rated Movies
+        </Title>
+        <Demo url={"movies/top_rated"}/>
+      </Card>
+
+
 
       {/* Watchlist Section */}
       <Card

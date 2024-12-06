@@ -1,5 +1,5 @@
 
-import { SimpleGrid, Image, Anchor} from '@mantine/core';
+import { SimpleGrid, Image, Anchor, Text, Rating, Center} from '@mantine/core';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -27,7 +27,6 @@ function WatchList() {
         const fetchMovies = async () => {
           try {
             const res = await axios.get(fetchUrl);
-            console.log(res.data)
             setMovies(res.data);    
           } catch (error) {
             console.error("Failed to fetch movies:", error);
@@ -40,6 +39,9 @@ function WatchList() {
     const slides = movies.map((item) => (
         <div key={item.movieDetails.id} >
           <Card {...{image: item.movieDetails.poster_path, id: item.movieDetails.id}} />
+          <Center m={5}>
+          <Rating value={item.movieDetails.userRating} fractions={2} readOnly/>
+          </Center>
         </div>
       ));
   return (

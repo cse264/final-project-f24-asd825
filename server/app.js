@@ -76,8 +76,10 @@ app.get('/protected', passport.authenticate('jwt', { session: false }), (req, re
   // Return the authenticated user's information
   res.json({ user: req.user });
 });
-// Geta popular movies using  TMDB api
-app.get('/movies/popular', passport.authenticate('jwt', { session: false }), async (req, res) => {
+
+
+// Get trending movies using  TMDB api
+app.get('/movies/trending', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const fetchUrl = 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
   try {
     const options = {
@@ -89,7 +91,6 @@ app.get('/movies/popular', passport.authenticate('jwt', { session: false }), asy
     };
     const response = await fetch(fetchUrl, options);
     const data = await response.json();
-    console.log(data)
     res.json(data.results);
   } catch (error) {
     console.log(error)
@@ -98,6 +99,47 @@ app.get('/movies/popular', passport.authenticate('jwt', { session: false }), asy
   
 });
 
+// Geta upcoming movies using  TMDB api
+app.get('/movies/upcoming', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const fetchUrl = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1'
+  try {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    };
+    const response = await fetch(fetchUrl, options);
+    const data = await response.json();
+    res.json(data.results);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send()
+  }
+  
+});
+
+// Geta popular movies using  TMDB api
+app.get('/movies/top_rated', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const fetchUrl = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1'
+  try {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    };
+    const response = await fetch(fetchUrl, options);
+    const data = await response.json();
+    res.json(data.results);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send()
+  }
+  
+});
 
 app.get('/movies/search', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const { query } = req.query; // Extract 'query' parameter from the request
@@ -224,6 +266,8 @@ app.get('/watchlist', passport.authenticate('jwt', { session: false }), async (r
       const apiUrl = `https://api.themoviedb.org/3/movie/${tmdb_id}?api_key=${process.env.API_KEY}`;
       try {
         const response = await axios.get(apiUrl);
+        const result = await query("SELECT rating FROM watchedlist WHERE user_id = $1 AND tmdb_id = $2", [userId, tmdb_id])
+        response.data.userRating = result.rows.length > 0 ? result.rows[0].rating : null;
         return response.data; // Return the movie details
       } catch (error) {
         console.error(`Failed to fetch movie details for TMDB ID ${tmdb_id}:`, error.message);

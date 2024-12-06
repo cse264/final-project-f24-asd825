@@ -6,10 +6,14 @@ import {
     SimpleGrid,
     Rating,
     Button,
+    Stack,
+    Center,
   } from '@mantine/core';
   import React, { useState, useEffect  } from 'react';
   import axios from 'axios';
   import {useParams} from 'react-router-dom'
+  import SvgImage from '../assets/tmdb.svg?url'
+
    
   function MoviePage() {
     // State for the watchlist button and rating
@@ -86,22 +90,25 @@ import {
           style={{ alignItems: 'center' }} // Vertically align items
         >
           {/* Image with Gray Border */}
-          <div
-            style={{
-              maxWidth: '200px',
-              margin: '0 auto',
-              border: '1px solid gray', // Gray border around the image
-              borderRadius: '8px', // Rounded corners for the border
-              padding: '5px', // Optional padding between image and border
-            }}
-          >
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              radius="md"
-              fit="contain" // Ensures the full image is visible
-              
-            />
-          </div>
+          <Stack>
+            <div
+              style={{
+                maxWidth: '200px',
+                margin: '0 auto',
+                border: '1px solid gray', // Gray border around the image
+                borderRadius: '8px', // Rounded corners for the border
+                padding: '5px', // Optional padding between image and border
+              }}
+            >
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                radius="md"
+                fit="contain" // Ensures the full image is visible
+                
+              />
+            </div>
+          </Stack>
+          
   
           {/* Text with Title */}
           <div>
@@ -111,9 +118,14 @@ import {
             <Text>
               {movie.overview}
             </Text>
+
+            <Center >
+            <img src={SvgImage} alt="My image" width={100} height={100} />
+            <Text pl={12}style={{ display: 'inline'}}>{Math.trunc(movie.vote_average*10)/10}</Text>  <Rating color="orange" defaultValue={2} size="sm" count={1} />
+            </Center>
   
             {/* Rating Component */}
-            <div style={{ marginTop: '20px' }}>
+            <div >
               <Text size="sm" c="dimmed">Rate:</Text>
               <Rating
                 value={rating}

@@ -53,6 +53,7 @@ const Navbar = () => {
   const links = [
     { link: '/protected', label: 'Home' },
     { link: '/profile', label: 'Profile' },
+    { link: '/watchlist', label: 'WatchList' },
   ];
   if(user && user.user_type === "admin")
     links.push({ link: '/admin', label: 'Admin Page' })

@@ -8,6 +8,7 @@ import AppLayout from './components/AppLayout';
 import MoviePage from './components/MoviePage';
 import AdminPage from './components/admin';
 import ProfilePage from './components/Profile';
+import WatchListPage from './components/WatchListPage';
 
 const PrivateRoute = ({ children }) => {
   const { user, authLoading } = useContext(AuthContext);
@@ -52,6 +53,14 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <MoviePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/watchlist"
+              element={
+                <PrivateRoute>
+                  <WatchListPage />
                 </PrivateRoute>
               }
             />

@@ -32,9 +32,9 @@ function Card({ image, title, category }) {
   );
 }
 
-function Demo() {
+function Demo({url}) {
   const [movies, setMovies] = useState([]);
-  const fetchUrl = 'http://localhost:5000/movies/popular'
+  const fetchUrl = `http://localhost:5000/${url}`
   useEffect(() => {
     const fetchMovies = async () => {
       try {
