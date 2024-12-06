@@ -84,7 +84,7 @@ app.get('/movies/popular', passport.authenticate('jwt', { session: false }), asy
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OTJiNDU0OTU0Y2M2NDI2OGJkMmNlNDk2YmQ2M2YxZSIsIm5iZiI6MTczMjc1ODE0MS40OCwic3ViIjoiNjc0N2NhN2QzNzliMDNhOWYxZDA1MTlhIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.gmnqlSF7lsQkorFgFQfpwgOcfs2eqH25R-mQOy9ygew',
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
       },
     };
     const response = await fetch(fetchUrl, options);
@@ -142,7 +142,7 @@ app.get('/movies/search', passport.authenticate('jwt', { session: false }), asyn
 app.get('/movies/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const id = req.params.id
   console.log(id)
-  const fetchUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=692b454954cc64268bd2ce496bd63f1e`
+  const fetchUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.API_KEY}`
   try {
     console.log(fetchUrl)
     const response = await fetch(fetchUrl);
@@ -221,7 +221,7 @@ app.get('/watchlist', passport.authenticate('jwt', { session: false }), async (r
 
     // Function to fetch movie details from TMDB API
     const fetchMovieDetails = async (tmdb_id) => {
-      const apiUrl = `https://api.themoviedb.org/3/movie/${tmdb_id}?api_key=692b454954cc64268bd2ce496bd63f1e`;
+      const apiUrl = `https://api.themoviedb.org/3/movie/${tmdb_id}?api_key=${process.env.API_KEY}`;
       try {
         const response = await axios.get(apiUrl);
         return response.data; // Return the movie details
