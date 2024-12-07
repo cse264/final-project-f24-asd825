@@ -39,6 +39,8 @@ The Movies/TV Shows Platform allows users to sign in or sign up, with an option 
 8. Run `npm install`, then run `npm run dev`.
 9. You're done! Open the browser and go to `http://localhost:5173`.
 
+10. admin credentials: email: example@me.com --- Password: 123
+
 ## If you want to get your own API key:
 
 1. Go to the TMDB API website: https://developer.themoviedb.org/reference/intro/getting-started.
