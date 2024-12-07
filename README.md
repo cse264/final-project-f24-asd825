@@ -36,7 +36,7 @@
 
  0. clone the repo
 
- 1. First, I've included a .env.example file with all the necessary api keys and DB connection variables. I know that's not the proper way but it was done for the Grader's convient
+ 1. First, I've included a .env.example file with all the necessary api keys and DB connection variables. I know that's not the proper way but it was done for the Grader's convenience
 
  2. Rename the .env.example file to .env
 
