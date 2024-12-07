@@ -11,6 +11,19 @@
 * Hassan Al Maqdoud -- maneging the Database and Deploying it
   * Hassan manages the PostgreSQL database, handling user data, watchlists, and using Neon to host the database for seamless frontend and backend interaction.
 
+## Functionality
+
+* The platform  supports User and Admin accounts. Regular users can sign up to manage their Watchlist, and update profiles. Admins have additional access to edit both user profiles , handling user management.
+
+* We used use a PostgreSQL database to store User Data ( watchlist, account credentials) 
+
+* A React-based interface was used to create a responsive experience, with a Home Page that display trending and top rated movies and watchlist.and a Profile Page and a watchlist page. Admins get dedicated page for managing users. And lastly, a movie page that shows the poster, rating and options to rate and add to the watchlist
+
+* Passport was used to handle authentication. Mantine was used for the React Components. Axios was used to handle fetching more easily
+
+* The TMDB API is used to supply movie data, providing the platform’s database with up-to-date titles, genres, and cast details. 
+
+
 
 
 
