@@ -23,6 +23,13 @@
 
 * The TMDB API is used to supply movie data, providing the platform’s database with up-to-date titles, genres, and cast details. 
 
+## Tech Stack:
+ * Frontend: React - Mantine - Vite
+ * Backend: Node/Express.js - Axios - Passport.js
+ * Database : PostgreSQL with Neon
+ * API: TMDB to fetch movie data
+
+
 
 
 
