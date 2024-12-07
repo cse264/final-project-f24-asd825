@@ -82,7 +82,7 @@ const Navbar = () => {
             onClick={() => navigate('/')}
             style={{ cursor: 'pointer', color: '#1c7ed6' }}
           >
-            MyApp
+            IMDB2.0
           </Text>
         </Group>
 
