@@ -69,7 +69,7 @@
 
 
 ## If you want to run the database locally instead of using ours
-## this is NOT reccommneded as it is a hassale
+## this is NOT reccommneded as it is a hassle
 
 1. when installing PostgreSQL, make sure to install PgAdmin with it (there is a checkbox that you'll ecnounter when installing PostgreSQL to install PgAdmin).
 
