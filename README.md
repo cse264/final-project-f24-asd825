@@ -11,7 +11,7 @@
 * Hassan Al Maqdoud -- maneging the Database and Deploying it
   * Hassan manages the PostgreSQL database, handling user data, watchlists, and using Neon to host the database for seamless frontend and backend interaction.
 
-## Functionality
+## Functionality/ Description
 
 * The platform  supports User and Admin accounts. Regular users can sign up to manage their Watchlist, and update profiles. Admins have additional access to edit both user profiles , handling user management.
 
@@ -28,6 +28,9 @@
  * Backend: Node/Express.js - Axios - Passport.js
  * Database : PostgreSQL with Neon
  * API: TMDB to fetch movie data
+
+ ## User Story:
+ The Movies/TV Shows Platform allows users to sign in or sign up, with an option for admin login. Once logged in, users are directed to the homepage, where they can view trending and top-rated movies, along with their watchlist. A search bar lets users find specific movies, and upon selecting a title, they are taken to the movie page, where they can see movie information, rate it, and add it to their watchlist. Users can manage their watchlist and profile through dedicated pages. Admins have the ability to manage the Users.
 
 
 
